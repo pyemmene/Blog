@@ -1,0 +1,266 @@
+[
+  {
+    "natural language": "apache access logs",
+    "lucene query": "type:\"apache_access\""
+  },
+  {
+    "natural language": "Find all logs related to SSH",
+    "lucene query": "program:\"sshd\""
+  },
+  {
+    "natural language": "Find all Apache logs where the response size is greater than 1MB",
+    "lucene query": "type:\"apache_access\" AND bytes:>1048576"
+  },
+  {
+    "natural language": "Show me all logs from the last 30 minutes",
+    "lucene query": "@timestamp:[now-30m TO now]"
+  },
+  {
+    "natural language": "Show all logs where the message contains 'authentication failure'",
+    "lucene query": "message:\"authentication failure\""
+  },
+  {
+    "natural language": "POST requests for apache",
+    "lucene query": "(type:\"apache_access\" OR type:\"apache_error\" AND verb:\"POST\""
+  },
+  {
+    "natural language": "message contains 'error'",
+    "lucene query": "message:*error*"
+  },
+  {
+    "natural language": "Show all apache logs with 500 status code",
+    "lucene query": "type:\"apache_access\" AND response:500"
+  },
+  {
+    "natural language": "Find all apache logs containing the word 'timeout' excluding those tagged as 'debug'",
+    "lucene query": "type:\"apache_access\" AND message:\"timeout\" AND -tags:\"debug\""
+  },
+  {
+    "natural language": "Find logs from 'sshd' program excluding logs tagged as 'debug' with priority greater than 10",
+    "lucene query": "program:\"sshd\" AND -tags:\"debug\" AND priority:[11 TO *]"
+  },
+  {
+    "natural language": "Show logs from October 15th, 2023",
+    "lucene query": "@timestamp:[2023-10-15T00:00:00 TO 2023-10-15T23:59:59]"
+  },
+  {
+    "natural language": "Show apache_access logs from October 15th, 2023",
+    "lucene query": "type:\"apache_access\"  AND @timestamp:[2023-10-15T00:00:00 TO 2023-10-15T23:59:59]"
+  },
+  {
+    "natural language": "Show logs where message contains 'error'",
+    "lucene query": "message:*error*"
+  },
+  {
+    "natural language": "logs mentioning a USB device",
+    "lucene query": "message:*USB*"
+  },
+  {
+    "natural language": "the last month",
+    "lucene query": "@timestamp:[now-1M/M TO now/M]"
+  },
+  {
+    "natural language": "Get all errors from syslogs",
+    "lucene query": "type:\"syslog\" AND severity_label:\"error\""
+  },
+  {
+    "natural language": "Show logs from user with pid 456",
+    "lucene query": "pid:456"
+  },
+  {
+    "natural language": "priority higher than 5",
+    "lucene query": "priority:{5 TO *}"
+  },
+  {
+    "natural language": "failed user account logons",
+    "lucene query": "type:\"eventlog\" AND (EventID:4625 OR EventID:4776)"
+  },
+  {
+    "natural language": "logs where the process involved had PID 4567 or 7654",
+    "lucene query": "(pid:\"4567\" OR pid:\"7654\")"
+  },
+  {
+    "natural language": "Show logs from the Apache server that resulted in 500 errors last Friday",
+    "lucene query": "type:\"apache_access\" AND message:*500* AND @timestamp:[now-7d/d TO now-6d/d]"
+  },
+  {
+    "natural language": "Find all login events from user JohnDoe on host 10.0.0.5",
+    "lucene query": "host:\"10.0.0.5\" AND program:\"authentication\" AND message:*JohnDoe* AND message:*login*"
+  },
+  {
+    "natural language": "Retrieve Windows event logs related to system shutdown or restart events this month",
+    "lucene query": "type:\"windows_event\" AND (message:*shutdown* OR message:*restart*) AND @timestamp:[now-1M/M TO now/M]"
+  },
+  {
+    "natural language": "List all failed SSH login attempts from external IP addresses",
+    "lucene query": "program:\"ssh\" AND message:*failed* AND message:*login* AND NOT geoip.ip:[192.168.0.0 TO 192.168.255.255]"
+  },
+  {
+    "natural language": "Show logs related to firewall rule modifications in the last week",
+    "lucene query": "tags:\"firewall\" AND message:*rule modified* AND @timestamp:[now-7d/d TO now/d]"
+  },
+  {
+    "natural language": "Find all logs where the process involved had PID 4567 or 7654",
+    "lucene query": "(pid:\"4567\" OR pid:\"7654\")"
+  },
+  {
+    "natural language": "Display all high priority logs from devices located in the US or Canada",
+    "lucene query": "priority:\"high\" AND (geoip.country_name:\"United States\" OR geoip.country_name:\"Canada\")"
+  },
+  {
+    "natural language": "Retrieve all logs of failed database transactions from the finance application since the start of the quarter",
+    "lucene query": "program:\"finance_app\" AND message:*transaction failed* AND @timestamp:[now/q TO now]"
+  },
+  {
+    "natural language": "Show logs that include both 'timeout' and 'error' in the message, excluding those from test environments",
+    "lucene query": "message:*timeout* AND message:*error* AND NOT tags:\"test_environment\""
+  },
+  {
+    "natural language": "Find logs for USB device connections that occurred while the security program was active",
+    "lucene query": "message:*USB connected* AND program:\"security\" AND @timestamp:[program_start_time TO program_end_time]"
+  },
+  {
+    "natural language": "Display Apache access logs with response code 404 from any server except server01",
+    "lucene query": "type:\"apache_access\" AND message:*404* AND NOT host:\"server01\""
+  },
+  {
+    "natural language": "List all logs from the last 30 minutes with geo-location data available",
+    "lucene query": "@timestamp:[now-30m TO now] AND _exists_:geoip.location"
+  },
+  {
+    "natural language": "Show all logs tagged as 'network' and 'issue' from the last three days",
+    "lucene query": "tags:(+network +issue) AND @timestamp:[now-3d/d TO now/d]"
+  },
+  {
+    "natural language": "Display logs that originated from any host in the 172.16.0.0/12 subnet over the past week",
+    "lucene query": "host:[172.16.0.0 TO 172.31.255.255] AND @timestamp:[now-1w TO now]"
+  },
+  {
+    "natural language": "List all events where the facility is kernel that have occurred since midnight",
+    "lucene query": "facility:\"kernel\" AND @timestamp:[now/d TO now]"
+  },
+  {
+    "natural language": "Show me Apache access logs from the last 2 hours with response code 200",
+    "lucene query": "type:\"apache_access\" AND @timestamp:[now-2h TO now] AND response:200"
+  },
+  {
+    "natural language": "Find logs where the host is 'webserver1' and the process is 'nginx' between 10am and 2pm yesterday",
+    "lucene query": "host:\"webserver1\" AND program:\"nginx\" AND @timestamp:[now-1d/d+10h TO now-1d/d+14h]"
+  },
+  {
+    "natural language": "Show logs with priority above 3 and tagged as 'critical' within the last 24 hours",
+    "lucene query": "priority:{3 TO *} AND tags:\"critical\" AND @timestamp:[now-24h TO now]"
+  },
+  {
+    "natural language": "Find Windows event logs where EventID is either 4624 or 4672",
+    "lucene query": "(EventID:4624 OR EventID:4672) AND type:\"windows_event\""
+  },
+  {
+    "natural language": "Show me all logs where geoip.country is 'US' and the message contains 'failed login'",
+    "lucene query": "geoip.country_name:\"US\" AND message:*failed login*"
+  },
+  {
+    "natural language": "Retrieve logs where the URL path is '/api/login' and method is POST from last week",
+    "lucene query": "url_path:\"/api/login\" AND http_method:\"POST\" AND @timestamp:[now-7d/d TO now]"
+  },
+  {
+    "natural language": "Show logs where the process 'java' has been restarted, indicated by 'restarting' in messages",
+    "lucene query": "program:\"java\" AND message:*restarting*"
+  },
+  {
+    "natural language": "Find logs with CPU usage over 90% from hosts with IP starting with '10.0.4.'",
+    "lucene query": "cpu_usage:{90 TO 100} AND host:10.0.4.*"
+  },
+  {
+    "natural language": "Display all logs where the HTTP status is 404, and the referrer does not contain 'bot'",
+    "lucene query": "status:404 AND NOT referrer:*bot*"
+  },
+  {
+    "natural language": "Show logs from devices with geoip in New York or New Jersey from the last 30 days",
+    "lucene query": "(geoip.region_name:\"New York\" OR geoip.region_name:\"New Jersey\") AND @timestamp:[now-30d TO now]"
+  },
+  {
+    "natural language": "Retrieve logs where the memory usage is less than 50% for systems tagged as 'database'",
+    "lucene query": "memory_usage:[0 TO 50] AND tags:\"database\""
+  },
+  {
+    "natural language": "Find logs where the user agent contains 'Firefox' but not version '45.0'",
+    "lucene query": "user_agent:*Firefox* AND NOT user_agent:*45.0*"
+  },
+  {
+    "natural language": "Show me logs where port is 80 or 443 for traffic observed in the last 2 hours",
+    "lucene query": "(port:80 OR port:443) AND @timestamp:[now-2h TO now]"
+  },
+  {
+    "natural language": "Find all logs from the 'gateway' host with a payload size over 1000 bytes",
+    "lucene query": "host:\"gateway\" AND payload_size:{1000 TO *}"
+  },
+  {
+    "natural language": "Display logs where the type is 'firewall' and the action is 'block' within the last week",
+    "lucene query": "type:\"firewall\" AND action:\"block\" AND @timestamp:[now-7d TO now]"
+  },
+  {
+    "natural language": "Retrieve all logs where the database query time exceeds 200 ms",
+    "lucene query": "db_query_time:{200 TO *}"
+  },
+  {
+    "natural language": "Show logs with errors that occurred during the first half of last month",
+    "lucene query": "severity_label:\"error\" AND @timestamp:[now-1M/M TO now-1M/M+15d]"
+  },
+  {
+    "natural language": "Find logs where the transaction volume is above 1000 units for the 'sales' application",
+    "lucene query": "transaction_volume:{1000 TO *} AND program:\"sales\""
+  },
+  {
+    "natural language": "Show logs from any host in the '10.2.*.*' range where disk usage is at critical levels above 95%",
+    "lucene query": "host:10.2.*.* AND disk_usage:{95 TO 100}"
+  },
+  {
+    "natural language": "Display logs indicating 'network failure' from the last 3 days",
+    "lucene query": "message:*network failure* AND @timestamp:[now-3d TO now]"
+  },
+  {
+    "natural language": "Retrieve logs where the application 'mailserver' reported a 'delivery failure'",
+    "lucene query": "program:\"mailserver\" AND message:*delivery failure*"
+  },
+  {
+    "natural language": "Find logs from 'vpnserver' where the user was 'admin' and the session lasted over 1 hour",
+    "lucene query": "logsource:\"vpnserver\" AND username:\"admin\" AND session_duration:{3600 TO *}"
+  },
+  {
+    "natural language": "Show logs where the type is 'IDS' and the alert level is high within the last 24 hours",
+    "lucene query": "type:\"IDS\" AND alert_level:\"high\" AND @timestamp:[now-24h TO now]"
+  },
+  {
+    "natural language": "Display all 'cron' job logs from Linux servers where the job took over 30 seconds",
+    "lucene query": "program:\"cron\" AND os:\"Linux\" AND job_duration:{30 TO *}"
+  },
+  {
+    "natural language": "Find logs where the email process took longer than 5 seconds and originated from 'server1'",
+    "lucene query": "program:\"email\" AND process_duration:{5 TO *} AND host:\"server1\""
+  },
+  {
+    "natural language": "Show me Apache error logs related to 'SSL handshake' from the last week",
+    "lucene query": "type:\"apache_error\" AND message:*SSL handshake* AND @timestamp:[now-7d TO now]"
+  },
+  {
+    "natural language": "Retrieve logs where the network traffic was blocked by 'iptables' with severity 'notice'",
+    "lucene query": "program:\"iptables\" AND action:\"blocked\" AND severity_label:\"notice\""
+  },
+  {
+    "natural language": "Messages with journald",
+    "lucene query": "message:\"journald\""
+  },
+  {
+    "natural language": "AY-Wu545PILuOqrNMoGr",
+    "lucene query": "_id:\"AY-Wu545PILuOqrNMoGr\""
+  },
+  {
+    "natural language": "Soap request",
+    "lucene query": "message:\"SOAP request\""
+  },
+  {
+    "natural language": "logged out",
+    "lucene query": "(EventID:4634 OR EventID:4647) AND (EventType:AUDIT_SUCCESS OR EventType:AUDIT_FAILURE)"
+  }
+]
