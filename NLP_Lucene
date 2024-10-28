@@ -2,265 +2,331 @@
   {
     "Input": "apache access logs",
     "Output": "type:\"apache_access\""
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Find all logs related to SSH",
     "Output": "program:\"sshd\""
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Find all Apache logs where the response size is greater than 1MB",
     "Output": "type:\"apache_access\" AND bytes:>1048576"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show me all logs from the last 30 minutes",
     "Output": "@timestamp:[now-30m TO now]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show all logs where the message contains 'authentication failure'",
     "Output": "message:\"authentication failure\""
+     "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "POST requests for apache",
     "Output": "(type:\"apache_access\" OR type:\"apache_error\" AND verb:\"POST\""
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "message contains 'error'",
     "Output": "message:*error*"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show all apache logs with 500 status code",
     "Output": "type:\"apache_access\" AND response:500"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Find all apache logs containing the word 'timeout' excluding those tagged as 'debug'",
     "Output": "type:\"apache_access\" AND message:\"timeout\" AND -tags:\"debug\""
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Find logs from 'sshd' program excluding logs tagged as 'debug' with priority greater than 10",
     "Output": "program:\"sshd\" AND -tags:\"debug\" AND priority:[11 TO *]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show logs from October 15th, 2023",
     "Output": "@timestamp:[2023-10-15T00:00:00 TO 2023-10-15T23:59:59]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show apache_access logs from October 15th, 2023",
     "Output": "type:\"apache_access\"  AND @timestamp:[2023-10-15T00:00:00 TO 2023-10-15T23:59:59]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show logs where message contains 'error'",
     "Output": "message:*error*"
+     "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "logs mentioning a USB device",
     "Output": "message:*USB*"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "the last month",
     "Output": "@timestamp:[now-1M/M TO now/M]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Get all errors from syslogs",
     "Output": "type:\"syslog\" AND severity_label:\"error\""
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show logs from user with pid 456",
     "Output": "pid:456"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "priority higher than 5",
     "Output": "priority:{5 TO *}"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "failed user account logons",
     "Output": "type:\"eventlog\" AND (EventID:4625 OR EventID:4776)"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "logs where the process involved had PID 4567 or 7654",
     "Output": "(pid:\"4567\" OR pid:\"7654\")"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show logs from the Apache server that resulted in 500 errors last Friday",
     "Output": "type:\"apache_access\" AND message:*500* AND @timestamp:[now-7d/d TO now-6d/d]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Find all login events from user JohnDoe on host 10.0.0.5",
     "Output": "host:\"10.0.0.5\" AND program:\"authentication\" AND message:*JohnDoe* AND message:*login*"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Retrieve Windows event logs related to system shutdown or restart events this month",
     "Output": "type:\"windows_event\" AND (message:*shutdown* OR message:*restart*) AND @timestamp:[now-1M/M TO now/M]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "List all failed SSH login attempts from external IP addresses",
     "Output": "program:\"ssh\" AND message:*failed* AND message:*login* AND NOT geoip.ip:[192.168.0.0 TO 192.168.255.255]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show logs related to firewall rule modifications in the last week",
     "Output": "tags:\"firewall\" AND message:*rule modified* AND @timestamp:[now-7d/d TO now/d]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Find all logs where the process involved had PID 4567 or 7654",
     "Output": "(pid:\"4567\" OR pid:\"7654\")"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Display all high priority logs from devices located in the US or Canada",
     "Output": "priority:\"high\" AND (geoip.country_name:\"United States\" OR geoip.country_name:\"Canada\")"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Retrieve all logs of failed database transactions from the finance application since the start of the quarter",
     "Output": "program:\"finance_app\" AND message:*transaction failed* AND @timestamp:[now/q TO now]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show logs that include both 'timeout' and 'error' in the message, excluding those from test environments",
     "Output": "message:*timeout* AND message:*error* AND NOT tags:\"test_environment\""
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Find logs for USB device connections that occurred while the security program was active",
     "Output": "message:*USB connected* AND program:\"security\" AND @timestamp:[program_start_time TO program_end_time]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Display Apache access logs with response code 404 from any server except server01",
     "Output": "type:\"apache_access\" AND message:*404* AND NOT host:\"server01\""
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "List all logs from the last 30 minutes with geo-location data available",
     "Output": "@timestamp:[now-30m TO now] AND _exists_:geoip.location"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show all logs tagged as 'network' and 'issue' from the last three days",
     "Output": "tags:(+network +issue) AND @timestamp:[now-3d/d TO now/d]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Display logs that originated from any host in the 172.16.0.0/12 subnet over the past week",
     "Output": "host:[172.16.0.0 TO 172.31.255.255] AND @timestamp:[now-1w TO now]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "List all events where the facility is kernel that have occurred since midnight",
     "Output": "facility:\"kernel\" AND @timestamp:[now/d TO now]"
+     "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show me Apache access logs from the last 2 hours with response code 200",
     "Output": "type:\"apache_access\" AND @timestamp:[now-2h TO now] AND response:200"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Find logs where the host is 'webserver1' and the process is 'nginx' between 10am and 2pm yesterday",
     "Output": "host:\"webserver1\" AND program:\"nginx\" AND @timestamp:[now-1d/d+10h TO now-1d/d+14h]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show logs with priority above 3 and tagged as 'critical' within the last 24 hours",
     "Output": "priority:{3 TO *} AND tags:\"critical\" AND @timestamp:[now-24h TO now]"
+     "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Find Windows event logs where EventID is either 4624 or 4672",
     "Output": "(EventID:4624 OR EventID:4672) AND type:\"windows_event\""
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show me all logs where geoip.country is 'US' and the message contains 'failed login'",
     "Output": "geoip.country_name:\"US\" AND message:*failed login*"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Retrieve logs where the URL path is '/api/login' and method is POST from last week",
     "Output": "url_path:\"/api/login\" AND http_method:\"POST\" AND @timestamp:[now-7d/d TO now]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show logs where the process 'java' has been restarted, indicated by 'restarting' in messages",
     "Output": "program:\"java\" AND message:*restarting*"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Find logs with CPU usage over 90% from hosts with IP starting with '10.0.4.'",
     "Output": "cpu_usage:{90 TO 100} AND host:10.0.4.*"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Display all logs where the HTTP status is 404, and the referrer does not contain 'bot'",
     "Output": "status:404 AND NOT referrer:*bot*"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show logs from devices with geoip in New York or New Jersey from the last 30 days",
     "Output": "(geoip.region_name:\"New York\" OR geoip.region_name:\"New Jersey\") AND @timestamp:[now-30d TO now]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Retrieve logs where the memory usage is less than 50% for systems tagged as 'database'",
     "Output": "memory_usage:[0 TO 50] AND tags:\"database\""
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Find logs where the user agent contains 'Firefox' but not version '45.0'",
     "Output": "user_agent:*Firefox* AND NOT user_agent:*45.0*"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show me logs where port is 80 or 443 for traffic observed in the last 2 hours",
     "Output": "(port:80 OR port:443) AND @timestamp:[now-2h TO now]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Find all logs from the 'gateway' host with a payload size over 1000 bytes",
     "Output": "host:\"gateway\" AND payload_size:{1000 TO *}"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Display logs where the type is 'firewall' and the action is 'block' within the last week",
     "Output": "type:\"firewall\" AND action:\"block\" AND @timestamp:[now-7d TO now]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Retrieve all logs where the database query time exceeds 200 ms",
     "Output": "db_query_time:{200 TO *}"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show logs with errors that occurred during the first half of last month",
     "Output": "severity_label:\"error\" AND @timestamp:[now-1M/M TO now-1M/M+15d]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Find logs where the transaction volume is above 1000 units for the 'sales' application",
     "Output": "transaction_volume:{1000 TO *} AND program:\"sales\""
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show logs from any host in the '10.2.*.*' range where disk usage is at critical levels above 95%",
     "Output": "host:10.2.*.* AND disk_usage:{95 TO 100}"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Display logs indicating 'network failure' from the last 3 days",
     "Output": "message:*network failure* AND @timestamp:[now-3d TO now]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Retrieve logs where the application 'mailserver' reported a 'delivery failure'",
     "Output": "program:\"mailserver\" AND message:*delivery failure*"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Find logs from 'vpnserver' where the user was 'admin' and the session lasted over 1 hour",
     "Output": "logsource:\"vpnserver\" AND username:\"admin\" AND session_duration:{3600 TO *}"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show logs where the type is 'IDS' and the alert level is high within the last 24 hours",
     "Output": "type:\"IDS\" AND alert_level:\"high\" AND @timestamp:[now-24h TO now]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Display all 'cron' job logs from Linux servers where the job took over 30 seconds",
     "Output": "program:\"cron\" AND os:\"Linux\" AND job_duration:{30 TO *}"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Find logs where the email process took longer than 5 seconds and originated from 'server1'",
     "Output": "program:\"email\" AND process_duration:{5 TO *} AND host:\"server1\""
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Show me Apache error logs related to 'SSL handshake' from the last week",
     "Output": "type:\"apache_error\" AND message:*SSL handshake* AND @timestamp:[now-7d TO now]"
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Retrieve logs where the network traffic was blocked by 'iptables' with severity 'notice'",
     "Output": "program:\"iptables\" AND action:\"blocked\" AND severity_label:\"notice\""
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Messages with journald",
     "Output": "message:\"journald\""
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "AY-Wu545PILuOqrNMoGr",
     "Output": "_id:\"AY-Wu545PILuOqrNMoGr\""
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "Soap request",
     "Output": "message:\"SOAP request\""
+    "Instruction": "Translate this sentence into Lucene query"
   },
   {
     "Input": "logged out",
     "Output": "(EventID:4634 OR EventID:4647) AND (EventType:AUDIT_SUCCESS OR EventType:AUDIT_FAILURE)"
+   "Instruction": "Translate this sentence into Lucene query"
   }
 ]
